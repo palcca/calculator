@@ -28,13 +28,12 @@ function operate(a, operator, b){
             if (Number(b) != 0){
                 return Number((Number(a)/Number(b)).toFixed(12));
             } else {
-                return;
+                return "can't / with 0";
             }
         }
         case "*": return Number(a)*Number(b);
     }
 }
-
 
 function calculate(string){
     if (string == undefined){return}
@@ -65,6 +64,7 @@ function clearDisplay(){
     displayText = document.querySelector("#calcDisplay");
     displayText.textContent = "";
 }
+
 function isNumber(string){
     string=Number(string);
     return typeof string === "number" && !Number.isNaN(string)
@@ -75,6 +75,7 @@ function lastIsOperator(string){
     if (string.slice(-1) == "*" ||
         string.slice(-1) == "-" ||
         string.slice(-1) == "/" ||
+        string.slice(-1) == "." ||
         string.slice(-1) == "+"  )
         {
             return true;
@@ -82,11 +83,13 @@ function lastIsOperator(string){
             return false;
         }
 }
+function rmLastChar(){
+    displayText = document.querySelector("#calcDisplay");
+    displayText.textContent = displayText.textContent.slice(0,displayText.textContent.length-1);
+}
 
 function btnPushed(string){
     displayText = document.querySelector("#calcDisplay");
-    console.log(displayText.textContent.split(-1));
-    console.log(lastIsOperator(displayText.textContent));
     if( !isNumber(string) && lastIsOperator(displayText.textContent)){ 
         return;
     } else {
@@ -97,6 +100,28 @@ function btnPushed(string){
     //numbers 0-9
     const btnOne = document.querySelector(".btnOne");
     btnOne.addEventListener("click", () => btnPushed("1"));
+    window.addEventListener("keydown", (a) => {
+        switch (a.key){
+            case "1": btnPushed("1"); break;
+            case "2": btnPushed("2"); break;
+            case "3": btnPushed("3"); break;
+            case "4": btnPushed("4"); break;
+            case "5": btnPushed("5"); break;
+            case "6": btnPushed("6"); break;
+            case "7": btnPushed("7"); break;
+            case "8": btnPushed("8"); break;
+            case "9": btnPushed("9"); break;
+            case "0": btnPushed("0"); break;
+            case "+": btnPushed("+"); break;
+            case "-": btnPushed("-"); break;
+            case "*": btnPushed("*"); break;
+            case "/": btnPushed("/"); break;
+            case ".": btnPushed("."); break;
+            case "Enter": calculate(displayText.textContent); break;
+            case "Delete": clearDisplay(); break;
+            case "Backspace": rmLastChar();break;
+        }
+    });
 
     const btnTwo = document.querySelector(".btnTwo");
     btnTwo.addEventListener("click", () => btnPushed("2"));
@@ -143,3 +168,10 @@ function btnPushed(string){
 
     const btnEval = document.querySelector(".btnEval");
     btnEval.addEventListener("click", () => calculate(displayText.textContent));
+
+    const btnPoint = document.querySelector(".btnPoint");
+    btnPoint.addEventListener("click", () => btnPushed("."));
+
+    const btnBackspace = document.querySelector(".btnBackspace");
+    btnBackspace.addEventListener("click", () => rmLastChar());
+

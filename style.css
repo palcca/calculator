@@ -5,7 +5,26 @@
     font-size:larger;
     font-weight: bolder;
     border-radius: 10px;
-    
+}
+
+.btnBackspace{
+    width: 180px;
+}
+
+.btnAdd {
+    color: red;
+}
+
+.btnSubtract {
+    color: blue;
+}
+
+.btnMultiply{
+    color: green;
+}
+
+.btnDivide{
+    color: orange
 }
 
 #calcDisplay {
@@ -31,7 +50,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-end;
-    height: 330px;
+    height: 400px;
     width: 270px;
     background-color: rgb(167, 158, 118);
     padding: 10px;
