@@ -1,10 +1,12 @@
-let displayText="";
+let displayText="0";
 
 function getNumbers(string){
+    if (string == undefined){return}
     return string.split(/[/ * \- +]/);
 }
 
 function getOperators(string){
+    if (string == undefined){return}
     let stringArray=string.split("");
     let result = stringArray.filter( a => {
         switch (a) {
@@ -29,17 +31,23 @@ function operate(a, operator, b){
 
 
 function calculate(string){
+    if (string == undefined){return}
     let numbers = getNumbers(string);
     let operators = getOperators(string);
-    let result=0;
-    for (i=2; i<(numbers.length+2); i+=2){
-        result = result + operate(numbers[i-2], operators[i-2], numbers[i-1]);
+    if (operators.length == 0){
+        displayText.textContent = numbers[0];
+        return
+    }
+    let result=operate(numbers[0], operators[0], numbers[1])
+    for (i=2; i<(numbers.length); i++){
+        result = operate(result, operators[(i-1)], numbers[i]);
     }
     displayText = document.querySelector("#calcDisplay");
     displayText.textContent = updateDisplay(result);    
 }
 
 function updateDisplay(string){
+    if (string == undefined){return}
     if (string.length > 14){
         return string.slice(0, 14)
     } else {
@@ -54,7 +62,13 @@ function clearDisplay(){
 
 function btnPushed(string){
     displayText = document.querySelector("#calcDisplay");
-    displayText.textContent = updateDisplay(displayText.textContent + string);
+    if (displayText.textContent.slice(-1) == string && (
+                                    string =="*" || string =="-" || string =="+" || string=="/" ||string =="."
+                                    )){
+        return;
+    } else {
+        displayText.textContent = updateDisplay(displayText.textContent + string);
+    }
 }
 //eventlistener for all button
     //numbers 0-9
