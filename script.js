@@ -100,28 +100,6 @@ function btnPushed(string){
     //numbers 0-9
     const btnOne = document.querySelector(".btnOne");
     btnOne.addEventListener("click", () => btnPushed("1"));
-    window.addEventListener("keydown", (a) => {
-        switch (a.key){
-            case "1": btnPushed("1"); break;
-            case "2": btnPushed("2"); break;
-            case "3": btnPushed("3"); break;
-            case "4": btnPushed("4"); break;
-            case "5": btnPushed("5"); break;
-            case "6": btnPushed("6"); break;
-            case "7": btnPushed("7"); break;
-            case "8": btnPushed("8"); break;
-            case "9": btnPushed("9"); break;
-            case "0": btnPushed("0"); break;
-            case "+": btnPushed("+"); break;
-            case "-": btnPushed("-"); break;
-            case "*": btnPushed("*"); break;
-            case "/": btnPushed("/"); break;
-            case ".": btnPushed("."); break;
-            case "Enter": calculate(displayText.textContent); break;
-            case "Delete": clearDisplay(); break;
-            case "Backspace": rmLastChar();break;
-        }
-    });
 
     const btnTwo = document.querySelector(".btnTwo");
     btnTwo.addEventListener("click", () => btnPushed("2"));
@@ -174,4 +152,31 @@ function btnPushed(string){
 
     const btnBackspace = document.querySelector(".btnBackspace");
     btnBackspace.addEventListener("click", () => rmLastChar());
+
+//keyboard support
+window.addEventListener("keydown", (a) => {
+    switch (a.key){
+        
+        case "1": btnPushed("1"); break;
+        case "2": btnPushed("2"); break;
+        case "3": btnPushed("3"); break;
+        case "4": btnPushed("4"); break;
+        case "5": btnPushed("5"); break;
+        case "6": btnPushed("6"); break;
+        case "7": btnPushed("7"); break;
+        case "8": btnPushed("8"); break;
+        case "9": btnPushed("9"); break;
+        case "0": btnPushed("0"); break;
+        case "+": btnPushed("+"); break;
+        case "-": btnPushed("-"); break;
+        case "*": btnPushed("*"); break;
+        case "/": btnPushed("/"); break;
+        case ",": btnPushed("."); break;
+        case ".": btnPushed("."); break;
+        case "Enter": calculate(displayText.textContent); break;
+        case "Delete": clearDisplay(); break;
+        case "Backspace": rmLastChar();break;
+    
+    }
+});
 
