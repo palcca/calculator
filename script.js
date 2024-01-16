@@ -95,7 +95,7 @@ function rmLastChar(){
 }
 
 function btnPushed(string){
-    if(displayText.textContent.slice(0)== 0 && displayText.textContent.slice(-1)== 0){ 
+    if(displayText.textContent == "0"){ 
         clearDisplay();
     }
     if( !isNumber(string) && lastIsOperator(displayText.textContent)){ 
