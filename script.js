@@ -8,6 +8,13 @@ function getNumbers(string){
     return string.split(/[/ * \- +]/);
 }
 
+function getPoints(string){
+    if (string == undefined){
+        return
+    }
+    return string.split(".").join("").length;
+}
+
 function getOperators(string){
     if (string == undefined){
         return
@@ -77,12 +84,25 @@ function isNumber(string){
     return typeof string === "number" && !Number.isNaN(string)
 }
 
-function lastIsOperator(string){
-    if (string.slice(-1) == "*" ||
-        string.slice(-1) == "-" ||
-        string.slice(-1) == "/" ||
-        string.slice(-1) == "." ||
-        string.slice(-1) == "+"  )
+function isFirstPoint(){
+    let numbers = getNumbers(displayText.textContent);
+    console.log(numbers[numbers.length-1].length);
+    console.log(numbers.length)
+    let points = getPoints(numbers[numbers.length-1])
+    console.log(points);
+    if (numbers[numbers.length-1].length != points){
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function sameOperator(){
+    if (displayText.textContent.slice(-1) == "*" ||
+        displayText.textContent.slice(-1) == "-" ||
+        displayText.textContent.slice(-1) == "/" ||
+        displayText.textContent.slice(-1) == "." ||
+        displayText.textContent.slice(-1) == "+"  )
         {
             return true;
         } else {
@@ -98,10 +118,12 @@ function btnPushed(string){
     if(displayText.textContent == "0"){ 
         clearDisplay();
     }
-    if( !isNumber(string) && lastIsOperator(displayText.textContent)){ 
+    
+    if( !isNumber(string) && sameOperator()) { 
         return;
-    } 
-     else {
+    } else if (string == "." && isFirstPoint()){
+        return;
+    } else {
             displayText.textContent = updateDisplay(displayText.textContent + string);
     }
 }
