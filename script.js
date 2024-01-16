@@ -1,12 +1,17 @@
-let displayText="0";
+let displayText=document.querySelector("#calcDisplay")
+displayText.textContent="0";
 
 function getNumbers(string){
-    if (string == undefined){return}
+    if (string == undefined){
+        return
+    }
     return string.split(/[/ * \- +]/);
 }
 
 function getOperators(string){
-    if (string == undefined){return}
+    if (string == undefined){
+        return
+    }
     let stringArray=string.split("");
     let result = stringArray.filter( a => {
         switch (a) {
@@ -36,7 +41,9 @@ function operate(a, operator, b){
 }
 
 function calculate(string){
-    if (string == undefined){return}
+    if (string == undefined){
+        return
+    }
     let numbers = getNumbers(string);
     let operators = getOperators(string);
     if (operators.length == 0){
@@ -47,12 +54,13 @@ function calculate(string){
     for (i=2; i<(numbers.length); i++){
         result = operate(result, operators[(i-1)], numbers[i]);
     }
-    displayText = document.querySelector("#calcDisplay");
     displayText.textContent = updateDisplay(result);    
 }
 
 function updateDisplay(string){
-    if (string == undefined){return}
+    if (string == undefined){
+        return
+    }
     if (string.length > 14){
         return string.slice(0, 14)
     } else {
@@ -61,8 +69,7 @@ function updateDisplay(string){
 }
 
 function clearDisplay(){
-    displayText = document.querySelector("#calcDisplay");
-    displayText.textContent = "";
+  displayText.textContent = "";
 }
 
 function isNumber(string){
@@ -71,7 +78,6 @@ function isNumber(string){
 }
 
 function lastIsOperator(string){
-    console.log(string)
     if (string.slice(-1) == "*" ||
         string.slice(-1) == "-" ||
         string.slice(-1) == "/" ||
@@ -83,19 +89,23 @@ function lastIsOperator(string){
             return false;
         }
 }
+
 function rmLastChar(){
-    displayText = document.querySelector("#calcDisplay");
-    displayText.textContent = displayText.textContent.slice(0,displayText.textContent.length-1);
+   displayText.textContent = displayText.textContent.slice(0,displayText.textContent.length-1);
 }
 
 function btnPushed(string){
-    displayText = document.querySelector("#calcDisplay");
+    if(displayText.textContent.slice(0)== 0 && displayText.textContent.slice(-1)== 0){ 
+        clearDisplay();
+    }
     if( !isNumber(string) && lastIsOperator(displayText.textContent)){ 
         return;
-    } else {
+    } 
+     else {
             displayText.textContent = updateDisplay(displayText.textContent + string);
     }
 }
+
 //eventlistener for all button
     //numbers 0-9
     const btnOne = document.querySelector(".btnOne");
