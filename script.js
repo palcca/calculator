@@ -24,7 +24,13 @@ function operate(a, operator, b){
     switch (operator){
         case "+": return Number(a)+Number(b);
         case "-": return Number(a)-Number(b);
-        case "/": return Number(a)/Number(b);
+        case "/": {
+            if (Number(b) != 0){
+                return Number((Number(a)/Number(b)).toFixed(12));
+            } else {
+                return;
+            }
+        }
         case "*": return Number(a)*Number(b);
     }
 }
