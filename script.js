@@ -65,15 +65,32 @@ function clearDisplay(){
     displayText = document.querySelector("#calcDisplay");
     displayText.textContent = "";
 }
+function isNumber(string){
+    string=Number(string);
+    return typeof string === "number" && !Number.isNaN(string)
+}
+
+function lastIsOperator(string){
+    console.log(string)
+    if (string.slice(-1) == "*" ||
+        string.slice(-1) == "-" ||
+        string.slice(-1) == "/" ||
+        string.slice(-1) == "+"  )
+        {
+            return true;
+        } else {
+            return false;
+        }
+}
 
 function btnPushed(string){
     displayText = document.querySelector("#calcDisplay");
-    if (displayText.textContent.slice(-1) == string && (
-                                    string =="*" || string =="-" || string =="+" || string=="/" ||string =="."
-                                    )){
+    console.log(displayText.textContent.split(-1));
+    console.log(lastIsOperator(displayText.textContent));
+    if( !isNumber(string) && lastIsOperator(displayText.textContent)){ 
         return;
     } else {
-        displayText.textContent = updateDisplay(displayText.textContent + string);
+            displayText.textContent = updateDisplay(displayText.textContent + string);
     }
 }
 //eventlistener for all button
