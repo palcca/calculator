@@ -86,10 +86,7 @@ function isNumber(string){
 
 function isFirstPoint(){
     let numbers = getNumbers(displayText.textContent);
-    console.log(numbers[numbers.length-1].length);
-    console.log(numbers.length)
     let points = getPoints(numbers[numbers.length-1])
-    console.log(points);
     if (numbers[numbers.length-1].length != points){
         return true;
     } else {
